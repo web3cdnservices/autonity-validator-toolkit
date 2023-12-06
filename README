@@ -1,0 +1,10 @@
+docker-compose up -d
+
+Then generate oracle key
+
+
+docker exec -ti autonity autonity account new --datadir /autonity-chaindata
+
+
+
+

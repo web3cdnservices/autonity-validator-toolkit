@@ -23,4 +23,18 @@ services:
       - --ws
       - --ws.addr=0.0.0.0
       - --ws.api=aut,eth,net,txpool,web3,admin
-#      - --nat=extip:<IP_ADDRESS>
+      - --nat=extip:${EXTERNAL_IP}
+
+  autonity_oracle:
+    image: ghcr.io/autonity/autonity-oracle-bakerloo:latest
+    container_name: autonity_oracle
+    restart: always
+    volumes:
+      - ./autoracle:/autoracle
+      - ./autoracle/oracle.key:/oracle.key:ro
+    command:
+      - -key.file=/oracle.key
+      - -key.password=${KEY_PASSWD}
+      - -ws=ws://autonity:8546
+      - -plugin.dir=/usr/local/bin/plugins/
+      - -plugin.conf="/autoracle/plugins-conf.yml
