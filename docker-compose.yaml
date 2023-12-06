@@ -15,7 +15,7 @@ services:
       - ./autonity-chaindata:/autonity-chaindata
     command:
       - --datadir=/autonity-chaindata
-      - --piccadilly
+      - --bakerloo
       - --http
       - --http.addr=0.0.0.0
       - --http.api=aut,eth,net,txpool,web3,admin
