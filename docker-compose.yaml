@@ -37,4 +37,4 @@ services:
       - -key.password=${KEY_PASSWD}
       - -ws=ws://autonity:8546
       - -plugin.dir=/usr/local/bin/plugins/
-      - -plugin.conf="/autoracle/plugins-conf.yml
+      - -plugin.conf=/autoracle/plugins-conf.yml
