@@ -66,7 +66,7 @@ nano .env
   `Use wireguard guys and keep parameter unchanged.`
    
 
-4. Run Toolkit.
+4. #### Run Toolkit.
    ## Toolkit WITH secure tunnel (Wireguard)
    ```
    ./tools/start_autonity_with_wireguard
@@ -76,3 +76,58 @@ nano .env
    ```
    ./tools/start_autonity
    ```
+
+   ![image](https://github.com/web3cdnservices/autonity-validator-toolkit/assets/115787312/c3cedde5-a511-435a-bb23-436372d1f7a1)
+
+5. #### Setup Shell ENV (aut command&other)
+   ```
+   ./tools/setup_shell_environment
+   ```
+   ### Then update environment
+   ```
+   source ~/.bashrc
+   ```
+6. #### Generate Or importing Oracle key
+
+    ### CASE A: Generating:
+   ```
+   aut account new
+   ```
+   Please Use some password from .env file.
+
+   ### CASE B:  Importing key
+   `Copy yout keys to folder: .data/.autonity/keystore`
+   ```
+   aut account import-private-key  --keyfile UTC_FILE_ABCD
+   ```
+7. #### Update .env file, and set ORACLE_UTC_FILE parameter.
+
+   Edit .env file with `nano` and change `ORACLE_UTC_FILE=""` with your wallet name (from prevous step)
+
+8. #### Generate Operator wallet.
+ 
+   `You can repeat step 6. But password can be any.`
+
+
+### Upgrade
+
+```
+cd /opt/subquery-indexer-toolkit
+git pull
+bash ./tools/start_indexer_with_wireguard 
+```
+All your configs will be safe. You not need manually edit configurations anymore.
+
+### Connecting to wireguard network
+#### You shuld install wireguard client on your home pc
+
+```
+Macos (https://apps.apple.com/us/app/wireguard/id1451685025?mt=12)
+Linux (see repos. yum install wireguard, emerge -av wireguard, apt install wireguard)
+Windows (https://www.wireguard.com/install/) PS also you can have access to coordinator/grafana pr any service anywhere with your android,iphone. (Just import config)
+https://play.google.com/store/apps/details?id=com.wireguard.android
+https://apps.apple.com/us/app/wireguard/id1441195209
+Archive SubqueryIndexerHandbook.tar.gz containes wireguard folder with 2 configuration files. You need only one. Secondary for secondary device or for team.
+
+Fell free copy paste configuratin and connect with it. Nothing nedd to change.
+```
