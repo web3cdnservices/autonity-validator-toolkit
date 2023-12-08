@@ -1,4 +1,7 @@
-autonity-chaindata
-autoracle
+.data/autonity_node
+.data/autonity_oracle
 .env
-
+.data/.autonity/keystore/*
+.data/grafana/datasources/*.yml
+AutonityHandbook
+AutonityHandbook.tar.gz 

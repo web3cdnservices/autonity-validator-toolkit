@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://autonity_prometheus:9090
+    headers:
+      Authorization: Bearer  token

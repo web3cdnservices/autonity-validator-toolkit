@@ -1,0 +1,16 @@
+#!/bin/bash
+
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+
+set -a
+source $ROOT_PATH/../.env
+source $ROOT_PATH/../.PACKAGE_USE
+
+
+echo "export  PATH=$PATH:$ROOT_PATH/../bin" >> ~/.bashrc
+set -a
+source ~/.bashrc
+
+echo -e "Please run command or relogin session:"
+echo -e "\e[32m source ~/.bashrc \e[0m"

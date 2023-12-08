@@ -1,0 +1,77 @@
+version: "3"
+
+x-logging:
+  &default-logging
+  options:
+    max-file: '1'
+    compress: 'false'
+  driver: local
+
+networks:
+  autonity_network:
+    name: autonity_network
+    external: true
+
+volumes:
+    prometheus_data: {}
+    grafana_data: {}
+
+services:
+
+
+  prometheus:
+    image: prom/prometheus:${PROMETHEUS_VERSION}
+    container_name: autonity_prometheus
+    volumes:
+      - prometheus_data:/prometheus
+      - ./.data/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./.data/prometheus/prometheus.conf.d:/etc/prometheus/prometheus.conf.d
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.8
+    expose:
+      - 9090
+#    ports:
+#      - 9090:9090
+
+  node-exporter:
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
+    expose:
+      - 9100
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.9
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /:/host:ro,rslave
+    command:
+      - '--path.rootfs=/host'
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points'
+      - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+    restart: always
+
+  grafana:
+    image: grafana/grafana:${GRAFANA_VERSION}
+    container_name: indexer_grafana
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.10
+    ports:
+      - ${SECURE_NETWORK_IP}:3000:3000
+    expose:
+      - 3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./.data/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./.data/grafana/dashboards:/etc/grafana/provisioning/dashboards
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
+      - GF_INSTALL_PLUGINS=fifemon-graphql-datasource

@@ -1,0 +1,54 @@
+version: "3"
+
+x-logging:
+  &default-logging
+  options:
+    max-file: '1'
+    compress: 'false'
+  driver: local
+
+networks:
+  autonity_network:
+    name: autonity_network
+    external: true
+
+services:
+
+  wireguard:
+    image: lscr.io/linuxserver/wireguard:latest
+    container_name: wireguard
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.11
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - SERVERPORT=${WIREGUARD_PORT}
+      - PEERS=3
+#      - PEERDNS=auto
+      - INTERNAL_SUBNET=${WIREGUARD_SUBNET}
+      - ALLOWEDIPS=${WIREGUARD_SUBNET}/24,${DOCKER_SUBNET_MASK}/24
+    volumes:
+      - .data/wireguard/config:/config
+    ports:
+      - ${WIREGUARD_PORT}:51820/udp
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    logging: *default-logging
+    restart: unless-stopped
+
+
+  pushgateway:
+    image: prom/pushgateway
+    container_name: pushgateway
+    restart: unless-stopped
+    expose:
+      - 9091
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.14
+    logging: *default-logging

@@ -1,0 +1,8 @@
+# grafana/provisioning/dashboards/dashboard.yml
+apiVersion: 1
+
+providers:
+  - name: 'Indexer Dashboard'
+    updateIntervalSeconds: 10
+    options:
+      path: /etc/grafana/provisioning/dashboards

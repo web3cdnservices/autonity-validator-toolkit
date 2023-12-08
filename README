@@ -1,4 +1,3 @@
-touch autoracle/plugins-conf.yml
 
 docker-compose up -d
 
@@ -10,9 +9,3 @@ docker exec -ti autonity autonity account new --datadir /autonity-chaindata
 
 
 
-
-#PEERS
-docker exec -ti autonity autonity attach /autonity-chaindata/autonity.ipc
-
-admin.addPeer("enode://46164e112b9a89641ca1cdb861fb7fefa6d5b111df1ec831601afdb6262a85af1865b4c53b378988c0b85e2d53b758c81322f86b5d3831ccf54d2e4e62c77ff6@34.142.78.108:30303")
-admin.addPeer("enode://475b720eded83c95ba55648127cb861c1620482690bfb3aece61f0cad85a234d7b73e1d2b29b753af4e9c6f5a1ffd16a1da04e1185169366fe011ca81ef2ecf7@35.189.83.7:30303")

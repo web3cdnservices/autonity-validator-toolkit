@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -ti aut_client  /usr/local/bin/web3 "$@"

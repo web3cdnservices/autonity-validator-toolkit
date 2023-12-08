@@ -1,0 +1,8 @@
+global:
+  scrape_interval:     20s
+  evaluation_interval: 10s
+
+scrape_config_files:
+  - prometheus.conf.d/*.yml
+
+scrape_configs:

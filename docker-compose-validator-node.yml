@@ -1,0 +1,77 @@
+version: "3"
+
+x-logging:
+  &default-logging
+  options:
+    max-file: '1'
+    compress: 'false'
+  driver: local
+
+networks:
+  autonity_network:
+    name: autonity_network
+
+services:
+  autonity:
+    image: ghcr.io/autonity/autonity:${AUTONITY_NODE_RELEASE}
+    container_name: autonity
+    restart: always
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.2
+    ports:
+      - ${SECURE_NETWORK_IP}:8545:8545
+      - ${SECURE_NETWORK_IP}:8546:8546
+      - 30303:30303
+      - 30303:30303/udp
+      - ${SECURE_NETWORK_IP}:6060:6060 #PPROD
+      - ${SECURE_NETWORK_IP}:6064:6064 #PROMETHEUS
+    volumes:
+      - ./.data/autonity_node:/autonity-chaindata
+    command:
+      - --datadir=/autonity-chaindata
+      - --${NETWORK_NAME}
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.api=aut,eth,net,txpool,web3,admin
+      - --http.vhosts=*
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.api=aut,eth,net,personal,txpool,web3,admin
+      - --nat=extip:${EXTERNAL_IP}
+      - --metrics
+      - --metrics.addr=0.0.0.0
+      - --metrics.port=6064
+      - --metrics.expensive
+      - --pprof
+
+  autonity_oracle:
+    image: ghcr.io/autonity/autonity-oracle-${NETWORK_NAME}:${AUTONITY_ORACLE_RELEASE}
+    container_name: autonity_oracle
+    restart: always
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.3
+    volumes:
+      - ./.data/autonity_oracle:/autoracle
+      - ./.data/.autonity/keystore/${ORACLE_UTC_FILE}:/oracle.key:ro
+    command:
+      - -key.file=/oracle.key
+      - -key.password=${ORACLE_KEY_PASSWD}
+      - -ws=ws://autonity:8546
+      - -plugin.dir=/usr/local/bin/plugins/
+      - -plugin.conf=/autoracle/plugins-conf.yml
+
+  aut_client:
+    image: aut_client:latest
+    container_name: aut_client
+    restart: always
+    volumes:
+      - ./.data/.autonity:/root/.autonity
+      - ./.data/.autonity/.autrc:/.autrc
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.4
+    build:
+      context: ./src/docker/aut_client/
+      dockerfile: Dockerfile
