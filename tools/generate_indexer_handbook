@@ -31,11 +31,15 @@ mkdir $BASE_PATH/AutonityHandbook
 mkdir $BASE_PATH/AutonityHandbook/wireguard
 
 cp  $BASE_PATH/.env  $BASE_PATH/AutonityHandbook/env.dump
-cp   ${WG_CONFIG_PATH}/peer1/peer1.conf $BASE_PATH/AutonityHandbook/wireguard/client1.conf
-cp   ${WG_CONFIG_PATH}/peer1/peer1.png $BASE_PATH/AutonityHandbook/wireguard/client1.png
 
-cp   ${WG_CONFIG_PATH}/peer2/peer2.conf $BASE_PATH/AutonityHandbook/wireguard/client2.conf
-cp   ${WG_CONFIG_PATH}/peer2/peer2.png $BASE_PATH/AutonityHandbook/wireguard/client2.png
+if [  -f " ${WG_CONFIG_PATH}/peer1/peer1.conf" ]; then
+
+    cp   ${WG_CONFIG_PATH}/peer1/peer1.conf $BASE_PATH/AutonityHandbook/wireguard/client1.conf
+    cp   ${WG_CONFIG_PATH}/peer1/peer1.png $BASE_PATH/AutonityHandbook/wireguard/client1.png
+
+    cp   ${WG_CONFIG_PATH}/peer2/peer2.conf $BASE_PATH/AutonityHandbook/wireguard/client2.conf
+    cp   ${WG_CONFIG_PATH}/peer2/peer2.png $BASE_PATH/AutonityHandbook/wireguard/client2.png
+fi
 
 touch "$BASE_PATH/AutonityHandbook/Autonity_Handbook.txt"
 
@@ -47,7 +51,7 @@ echo  -en "  Please save content below to your computer.\n \x1b[33;43m \x1b[30m 
 echo -en " \x1b[31m ----------------------------------------------------------------------------------------- \x1b[0m  \n\n"
 
 
-echo -en "❤ IGrafana:  http://${DOCKER_SUBNET_PREFIX}.10:3000 \n" | tee -a  $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
+echo -en "❤ Grafana:  http://${DOCKER_SUBNET_PREFIX}.10:3000 \n" | tee -a  $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
 echo -en "        Login: admin" | tee -a $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
 echo -en "        Password: ${GRAFANA_ADMIN_PASSWORD} \n\n" | tee -a  $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
 
