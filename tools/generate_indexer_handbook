@@ -29,8 +29,11 @@ rm -R -f "$BASE_PATH/AutonityHandbook"  2> /dev/null
 
 mkdir $BASE_PATH/AutonityHandbook
 mkdir $BASE_PATH/AutonityHandbook/wireguard
+mkdir $BASE_PATH/AutonityHandbook/keys
 
 cp  $BASE_PATH/.env  $BASE_PATH/AutonityHandbook/env.dump
+cp  $BASE_PATH/.data/autonity_node/autonity/nodekey $BASE_PATH/AutonityHandbook/nodekey
+cp  $BASE_PATH/.data/.autonity/keystore/* $BASE_PATH/AutonityHandbook/keys
 
 if [  -f " ${WG_CONFIG_PATH}/peer1/peer1.conf" ]; then
 
@@ -55,9 +58,10 @@ echo -en "❤ Grafana:  http://${DOCKER_SUBNET_PREFIX}.10:3000 \n" | tee -a  $BA
 echo -en "        Login: admin" | tee -a $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
 echo -en "        Password: ${GRAFANA_ADMIN_PASSWORD} \n\n" | tee -a  $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
 
-
-echo -en "💫 Wireguard client configuration file:  ${WG_CONFIG_PATH}/peer1/peer1.conf \n\n" | tee -a $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
-echo -en "💫 Wireguard client(2) configuration file:  ${WG_CONFIG_PATH}/peer2/peer2.conf \n\n" | tee -a $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
+if [  -f " ${WG_CONFIG_PATH}/peer1/peer1.conf" ]; then
+  echo -en "💫 Wireguard client configuration file:  ${WG_CONFIG_PATH}/peer1/peer1.conf \n\n" | tee -a $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
+  echo -en "💫 Wireguard client(2) configuration file:  ${WG_CONFIG_PATH}/peer2/peer2.conf \n\n" | tee -a $BASE_PATH/AutonityHandbook/Autonity_Handbook.txt
+fi
 
 echo -en "\n\n \x1b[31m ----------------------------------------------------------------------------------------- \x1b[0m \n "
 

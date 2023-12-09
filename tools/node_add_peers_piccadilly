@@ -1,0 +1,36 @@
+#!/bin/bash
+# PEERS ONLY FOR PICCADILLY NETWORK!
+
+/usr/bin/expect <<EOD
+spawn docker exec -ti autonity autonity attach /autonity-chaindata/autonity.ipc
+expect "To exit, press ctrl-d or type exit"
+#sleep 2
+send -- admin.addPeer('enode://d4dc137f987e17155a69b31e566494c16edafd228912483cc519a48ce85864781faccc38141cc0eb1df8cdb28b9b3ccd10e1c298bac78ac43bbe5804021c1152@34.142.71.5:30303')\n
+expect "true"
+send -- admin.addPeer('enode://74a4f767ad2f3f607a2db06732b44e6c61a68cae1959b331c18aea6256aae16bded31ba40dd85dcc4d719baaeb29f918726d19fa51b5d8174b27da0d7593e19b@34.142.33.89:30303')\n
+expect "true"
+send -- admin.addPeer("enode://0ddc30943837f9416f563063ed5d409aca37780b8b8f939ef9f4b7901b9eb94c09d7ba2af27f70b33d76e74403d00021c13ebc4943ad46bc1e5051689cd862b8@35.234.131.29:30303")\n
+expect "true"
+send -- admin.addPeer("enode://9435658d26e5daf30261648504560f6375b24cdf0e4403613d44ebc4020489cc67ac82ababe7928d63d9f113c67b946845d18db935abe3d241e665114fc75e94@35.177.73.222:30303")\n
+expect "true"
+send -- admin.addPeer("enode://fe2c621f2b660725a3d529b3eefd780e90bb86e9eb4b7136c0b00a7365260a478b9b8941f1a65c6d4d77bff1b2e22eb6d781f5cc86401d60b373c6d4155c189a@3.10.195.56:30304")\n
+expect "true"
+send -- admin.addPeer("enode://6ab1e6bbf5897e1a24ccf8d8718615ec972ffd54d99c3e46f4517d5602e8bf7110e2e5e2c2e584795e45e2e842172de044b4df165a7082133c6697b632da8282@18.168.88.205:30305")\n
+expect "true"
+send -- admin.addPeer("enode://3c7f26eb85a7fc37d5ea64c07598a28dd58f507477a88b2144179a4a162c6cba9407389d39c76386126f0604dd53141680d8075b6d210a22cc38c3a8dd877711@35.246.7.21:30303")\n
+expect "true"
+send -- admin.addPeer("enode://08e2ed9ca80772ce32e3b56fba3469e33a034a66780e4852586e38db657658fdc610cfb7345543a01277eb53af458ef7cac0b66570ac1982011f24d3832d782c@34.100.165.124:30303")\n
+expect "true"
+send -- admin.addPeer("enode://d820e4d53f1e47443c23f2db28b251ca8b8dc207a1b0a0e36ae1bbeb63d0cea4f00dabb61e5daf27468f022adc8780dfd181c57ce0db16a9668dd72e18ecac6b@159.203.156.236:30303")\n
+expect "true"
+send -- admin.addPeer("enode://5fe55ccfb89ed3fddba8e89561e7ec71bc2886b2d32c80061f01edd418dd66a20d8b2ab1c58bb42a123b4b3f55195dd497b9e4927e4e2cac39b840fe3a86a61f@65.109.113.250:30303")\n
+expect "true"
+
+#print -e "\n\n Peers added.\n\n"
+
+exit
+#interact
+EOD
+
+
+echo -e "\n\n Peers added.\n\n"

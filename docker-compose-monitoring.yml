@@ -37,9 +37,9 @@ services:
 #    ports:
 #      - 9090:9090
 
-  node-exporter:
+  node-exporter2:
     image: quay.io/prometheus/node-exporter:latest
-    container_name: node_exporter
+    container_name: node_exporter2
     expose:
       - 9100
     networks:

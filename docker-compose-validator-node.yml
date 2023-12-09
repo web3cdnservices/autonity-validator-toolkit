@@ -13,7 +13,7 @@ networks:
 
 services:
   autonity:
-    image: ghcr.io/autonity/autonity:${AUTONITY_NODE_RELEASE}
+    image: autonity-git:latest
     container_name: autonity
     restart: always
     networks:
@@ -24,10 +24,13 @@ services:
       - ${SECURE_NETWORK_IP}:8546:8546
       - 30303:30303
       - 30303:30303/udp
-      - ${SECURE_NETWORK_IP}:6060:6060 #PPROD
+      - ${SECURE_NETWORK_IP}:6060:6060 #PPROF
       - ${SECURE_NETWORK_IP}:6064:6064 #PROMETHEUS
     volumes:
       - ./.data/autonity_node:/autonity-chaindata
+    build:
+      context: ./src/docker/autonity/
+      dockerfile: Dockerfile
     command:
       - --datadir=/autonity-chaindata
       - --${NETWORK_NAME}
@@ -46,9 +49,12 @@ services:
       - --pprof
 
   autonity_oracle:
-    image: ghcr.io/autonity/autonity-oracle-${NETWORK_NAME}:${AUTONITY_ORACLE_RELEASE}
+    image: autonity-oracle-git:latest
     container_name: autonity_oracle
     restart: always
+    build:
+      context: ./src/docker/autoracle/
+      dockerfile: Dockerfile.${NETWORK_NAME}
     networks:
       autonity_network:
         ipv4_address: ${DOCKER_SUBNET_PREFIX}.3

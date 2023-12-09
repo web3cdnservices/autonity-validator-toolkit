@@ -2,7 +2,7 @@
 
 # Add Docker's official GPG key:
 sudo apt-get update
-sudo apt-get install -f -y ca-certificates curl gnupg mc htop curl jq git certbot
+sudo apt-get install -f -y ca-certificates curl gnupg mc htop curl jq git certbot expect
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
@@ -21,6 +21,7 @@ sudo apt-get remove -f -y  apparmor
 # get latest docker compose released tag
 COMPOSE_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | grep 'tag_name' | cut -d\" -f4)
 
+rm /usr/local/bin/docker-compose
 # Install docker-compose
 sh -c "curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose"
 chmod +x /usr/local/bin/docker-compose
