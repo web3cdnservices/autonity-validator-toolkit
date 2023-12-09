@@ -62,6 +62,6 @@ echo -e "\033[0;33m ✈ Autonity Node fully started  \033[0m\n"
 echo -e "\n\n"
 
 
-if [ ! -f "${ROOT_PATH}/../AutonityHandbook.tar.gz" ]; then
+#if [ ! -f "${ROOT_PATH}/../AutonityHandbook.tar.gz" ]; then
     bash $ROOT_PATH/generate_indexer_handbook
-fi
+#fi
