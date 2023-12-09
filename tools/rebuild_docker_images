@@ -1,0 +1,66 @@
+#!/bin/bash
+
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+if [ ! -x "$(command -v docker)" ] ||  [ ! -x "$(command -v docker-compose)" ] ||  [ ! -x "$(command -v git)" ] ||  [ ! -x "$(command -v bzip2)" ]   ; then
+    echo "Requirements not installed. Install docker-compose docker.io git curl bzip2"
+    exit 0
+fi
+
+
+if [ ! -f "${ROOT_PATH}/../.env" ]; then
+    echo -e "\033[0;31m ✘ CRITICAl. \n env does not exists. Please rename .env.default to .env and set correct configuration. \033[0m"
+    exit
+fi
+set -a
+source $ROOT_PATH/../.env
+source $ROOT_PATH/../.PACKAGE_USE
+set -a
+
+echo -e "\033[0;33m ♨ Rebuild   Autonity Packages  \033[0m\n"
+
+export EXTERNAL_IP=`curl -s http://whatismyip.akamai.com/`
+
+IP_PARTS=(${WIREGUARD_SUBNET//./ })
+PRIVATE_NETWORK_IP="${IP_PARTS[0]}.${IP_PARTS[1]}.${IP_PARTS[2]}.1"
+GATEWAY_IP_ADDRESS=$(/sbin/ip route | awk '/default/ { print $3 }')
+
+DOCKER_SUBNET_PARTS=(${DOCKER_SUBNET_MASK//./ })
+DOCKER_SUBNET_PREFIX="${DOCKER_SUBNET_PARTS[0]}.${DOCKER_SUBNET_PARTS[1]}.${DOCKER_SUBNET_PARTS[2]}"
+
+
+export PRIVATE_NETWORK_IP=$PRIVATE_NETWORK_IP
+export GATEWAY_IP_ADDRESS=$GATEWAY_IP_ADDRESS
+export DOCKER_SUBNET_PREFIX=$DOCKER_SUBNET_PREFIX
+
+if [ -z "${SECURE_NETWORK_IP}" ]; then
+    export SECURE_NETWORK_IP="0.0.0.0"
+fi
+
+
+# Grafana
+#for i in  $ROOT_PATH/../src/configuration/grafana/datasources/*.template
+#do
+#     FILENAME=$(basename ${i})
+#     cp -n -a  $i  $ROOT_PATH/../.data/grafana/datasources/${FILENAME%%.template}
+#done
+
+
+#sed -i "s|Authorization: Bearer ".*"|Authorization: Bearer  $PROMETHEUS_METRICS_TOKEN|" $ROOT_PATH/../.data/grafana/datasources/prometheus.yml
+
+
+#docker network create
+#docker-compose -f $ROOT_PATH/../docker-compose-network.yml up -d
+#echo -e "Network created\n"
+docker-compose -f $ROOT_PATH/../docker-compose-validator-node.yml  -f $ROOT_PATH/../docker-compose-monitoring.yml  build
+
+
+echo -e "\033[0;33m ✈ Ready. you can ./tools/start_autonity  \033[0m\n"
+
+
+echo -e "\n\n"
+
+
+#if [ ! -f "${ROOT_PATH}/../AutonityHandbook.tar.gz" ]; then
+#    bash $ROOT_PATH/generate_indexer_handbook
+#fi

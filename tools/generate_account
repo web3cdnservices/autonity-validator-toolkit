@@ -1,0 +1,16 @@
+#!/bin/bash
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+set -a
+source $ROOT_PATH/../.env
+source $ROOT_PATH/../.PACKAGE_USE
+set -a
+
+echo -e "\033[0;33m ♨ Account generation  \033[0m\n"
+
+
+
+docker exec -ti aut_client  /root/.local/bin/aut account new
+
+
+bash $ROOT_PATH/generate_indexer_handbook
