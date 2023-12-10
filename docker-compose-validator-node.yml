@@ -28,6 +28,7 @@ services:
       - ${SECURE_NETWORK_IP}:6064:6064 #PROMETHEUS
     volumes:
       - ./.data/autonity_node:/autonity-chaindata
+      - ./.data/.autonity:/root/.autonity
     build:
       context: ./src/docker/autonity/
       dockerfile: Dockerfile

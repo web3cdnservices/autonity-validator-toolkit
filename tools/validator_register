@@ -1,0 +1,34 @@
+#!/bin/bash
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+
+read -p ' ^|^m Enter account name: ' input_name
+
+while [ "$input_name" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect account name. \033[0m \n"
+  read -p ' ^|^m Enter account name: ' input_name
+done
+
+read -p ' ^|^m Enter new account password: ' input_password
+
+while [ "$input_password" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect password. \033[0m \n"
+  read -p ' ^|^m Enter new account password: ' input_password
+done
+
+ENODE=`aut node info | jq -r ".admin_enode"`
+PROOD=`$ROOT_PATH/validator_generate_proof ${input_name}`
+PUBLIC_ADDR=$(<"${ROOT_PATH}/../.data/.autonity/oracle.key.public")
+
+#aut validator register $ENODE $PUBLIC_ADDR $PROOD  | aut tx sign - | aut tx send -
+
+RAWTX=`docker exec -ti aut_client  /root/.local/bin/aut  validator register $ENODE $PUBLIC_ADDR $PROOD`
+
+SIGNEDTX=`echo $RAWTX |  docker exec -i aut_client  /root/.local/bin/aut tx sign --password $input_password -`
+
+OUTPUTTX=`echo $SIGNEDTX |  docker exec -i aut_client  /root/.local/bin/aut tx send -`
+
+echo -e "Tx info. Please use: aut tx wait 0x00000"
+echo $OUTPUTTX

@@ -1,0 +1,19 @@
+#!/bin/bash
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+if [[ -z "$1" ]];
+then
+read -p ' ^|^m Enter account name: ' input_name
+
+while [ "$input_name" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect account name. \033[0m \n"
+  read -p ' ^|^m Enter account name: ' input_name
+done
+else
+input_name=$1
+fi
+
+PUBLIC_ADDR=$(<"${ROOT_PATH}/../.data/.autonity/${input_name}.public")
+
+docker exec -ti autonity autonity genOwnershipProof --nodekey /autonity-chaindata/autonity/nodekey --oraclekey /root/.autonity/oracle.key.private $PUBLIC_ADDR | sed -n -e 's/^.*Signature hex: //p' |  tr -d $'\r'
