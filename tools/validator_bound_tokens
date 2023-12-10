@@ -1,0 +1,23 @@
+#!/bin/bash
+
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+
+read -p ' ^|^m Enter validator address: ' input_name
+
+while [ "$input_name" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect validator. \033[0m \n"
+  read -p ' ^|^m Enter validator address: ' input_name
+done
+
+read -p ' ^|^m Enter new account password: ' input_password
+
+while [ "$input_password" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect password. \033[0m \n"
+  read -p ' ^|^m Enter new account password: ' input_password
+done
+
+
+docker exec -i aut_client  /root/.local/bin/aut validator bond --validator $input_name 1 | docker exec -i aut_client  /root/.local/bin/aut tx sign --password $input_password  - | docker exec -i aut_client  /root/.local/bin/aut tx send -
