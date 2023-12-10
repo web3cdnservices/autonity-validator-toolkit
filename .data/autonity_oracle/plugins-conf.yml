@@ -1,0 +1,45 @@
+# The forex data plugins are used to fetch realtime rate of currency pairs:
+# EUR-USD, JPY-USD, GBP-USD, AUD-USD, CAD-USD and SEK-USD from commercial data providers.
+# There are 4 implemented forex data plugins, each of them requires the end user to apply for their own service key from
+# the selected data provider. The selection of which forex data plugin(s) to use is for the end user to decide. The user can use any one
+# of them, or he/she can use multiple forex data plugins in the setup.
+#
+# The crypto data plugins are used to fetch realtime rate of crypto currency pairs:
+# ATN-USD, NTN-USD, NTN-ATN from exchanges. For the Autonity Piccadilly Circus Games Competition Round 4 game,, the data provider of these pairs is a simulated
+# exchange that people can trade ATN and NTN in the markets created by it. Thus, there is no configuration required for
+# the plugin named pcgc_cax that fetch data of crypto currency pairs, since the default configurations inside the plugin
+# works for you.
+
+# For the forex data plugin default configuration is set, so the end user just needs to configure required settings, namely `name` and `key`. The configuration settings of a plugin are:
+#
+# type PluginConfig struct {
+#	Name               string `json:"name" yaml:"name"`         // the name of the plugin binary, it is required.
+#	Key                string `json:"key" yaml:"key"`           // the API key granted by data provider, it is required.
+#	Scheme             string `json:"scheme" yaml:"scheme"`     // the data service scheme, http or https, it is optional.
+#	Endpoint           string `json:"endpoint" yaml:"endpoint"` // the hostname of the data service endpoint, it is optional.
+#	Timeout            int    `json:"timeout" yaml:"timeout"`   // the timeout in seconds that a request last for, it is optional.
+#	DataUpdateInterval int    `json:"refresh" yaml:"refresh"`   // the interval in seconds to fetch data due to the rate limit from the provider.
+#}
+
+# As an example, to set the configuration of the plugin `forex_currencyfreaks`, only the required field are needed
+# however you can configure the optional fields on demand to fit your service quality from the rate provider.
+#  - name: forex_currencyfreaks              # required, it is the plugin file name in the plugin directory.
+#    key: 175aab9e47e54790bf6d502c48407c10   # required, visit https://currencyfreaks.com to get your key, and replace it.
+#    scheme: https                           # optional, https or http, default value is https.
+#    endpoint: api.currencyfreaks.com        # optional, default value is api.currencyfreaks.com
+#    timeout: 10                             # optional, default value is 10.
+#    refresh: 3600                           # optional, default value is 30, that is 30s to fetch data from data source.
+
+# Un-comment below lines to enable your forex data plugin's configuration on demand. Your production configurations start from below:
+
+#  - name: forex_currencyfreaks              # required, it is the plugin file name in the plugin directory.
+#    key: 175aab9e47e54790bf6d502c48407c10   # required, visit https://currencyfreaks.com to get your key, and replace it.
+
+#  - name: forex_openexchangerate            # required, it is the plugin file name in the plugin directory.
+#    key: 1be02ca33c4843ee968c4cedd2686f01   # required, visit https://openexchangerates.org to get your key, and replace it.
+
+#  - name: forex_currencylayer               # required, it is the plugin file name in the plugin directory.
+#    key: 105af082ac7f7d150c87303d4e2f049e   # required, visit https://currencylayer.com  to get your key, and replace it.
+
+#  - name: forex_exchangerate                # required, it is the plugin file name in the plugin directory.
+#    key: 111f04e4775bb86c20296530           # required, visit https://www.exchangerate-api.com to get your key, and replace it.

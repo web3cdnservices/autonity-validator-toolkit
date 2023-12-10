@@ -8,9 +8,29 @@ set -a
 
 echo -e "\033[0;33m ♨ Account generation  \033[0m\n"
 
+read -p ' ^|^m Enter new account password: ' input_password
+
+while [ "$input_password" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect password. \033[0m \n"
+  read -p ' ^|^m Enter new account password: ' input_password
+done
 
 
-docker exec -ti aut_client  /root/.local/bin/aut account new
 
+read -p ' ^|^m Enter password again: ' input_password2
+
+while [ "$input_password2" != "$input_password" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect password confirmation. \033[0m \n"
+  read -p ' ^|^m Enter password again: ' input_password2
+done
+
+
+GENERATION_RESULT=`$ROOT_PATH/includes/generate_account $input_password | tr -d $'\r'`
+
+echo "keyfile = /root/.autonity/keystore/${GENERATION_RESULT}" >> $ROOT_PATH/../.data/.autonity/.autrc
+
+echo -e "Generated wallet: ${GENERATION_RESULT}\n"
 
 bash $ROOT_PATH/generate_indexer_handbook

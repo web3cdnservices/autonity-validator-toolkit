@@ -1,5 +1,5 @@
 .data/autonity_node
-.data/autonity_oracle
+#.data/autonity_oracle/
 .env
 .data/.autonity/keystore/*
 .data/grafana/datasources/*.yml

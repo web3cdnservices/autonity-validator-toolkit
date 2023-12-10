@@ -1,18 +1,20 @@
 #!/bin/bash
 ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
 
-set -a
 source $ROOT_PATH/../.env
 source $ROOT_PATH/../.PACKAGE_USE
-set -a
 
 echo -e "\033[0;33m ♨ Generation Oracle key for  Autonity WITH password from .env  \033[0m\n"
 
 
-GENERATION_RESULT=`$ROOT_PATH/includes/generate_account $ORACLE_KEY_PASSWD`
-
+GENERATION_RESULT=`$ROOT_PATH/includes/generate_account $ORACLE_KEY_PASSWD | tr -d $'\r'`
+#echo "OLD $ORACLE_UTC_FILE"
 
 echo -e "Generated wallet: ${GENERATION_RESULT}\n"
-echo "keyfile = /root/.autonity/keystore/${GENERATION_RESULT}" >> $ROOT_PATH/../.data/.autonity/.autrc
+
+echo "ORACLE_UTC_FILE=\"${GENERATION_RESULT}\"" >> $ROOT_PATH/../.env
 
 bash $ROOT_PATH/generate_indexer_handbook
+
+
+echo -e "\n\n Please run start autonity again. You ORACLE_UTC_FILE in  .env updated"
