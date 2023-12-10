@@ -1,8 +1,10 @@
 .data/autonity_node
-#.data/autonity_oracle/
+.data/autonity_oracle/plugins-conf.yml
 .env
 .data/.autonity/keystore/*
 .data/grafana/datasources/*.yml
 .data/.autonity/.autrc
 AutonityHandbook
 AutonityHandbook.tar.gz 
+.data/.autonity/*.private
+.data/.autonity/*.public

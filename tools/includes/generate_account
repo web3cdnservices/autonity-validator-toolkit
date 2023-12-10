@@ -6,20 +6,6 @@ expect -re "Password for new account: "
 send -- "$ORACLE_KEY_PASSWD\r"
 expect -re "Confirm account password: "
 send -- "$ORACLE_KEY_PASSWD\r"
-#expect -re "/root/.autonity/keystore/"
-#sleep 3
-#expect *
-#puts $expect_out(buffer)
-#puts "The output is '$expect_out(buffer)' -----------"
-#sleep 3
-#expect "keystore"
-#expect "\n\n"
-#puts $expect_out(buffer)
-#expect -re {(.*)keystore(.*)}
-#expect -re {(.*)keystore(.*)}
-#expect -re {(.*)/root/.autonity/keystore/(.*)}
 expect -re {/root/.autonity/keystore/(.*)}
-#sleep 5
 puts "$expect_out(1,string)"
-#puts $expect_out(buffer)
-#iteract
+#sleep 4

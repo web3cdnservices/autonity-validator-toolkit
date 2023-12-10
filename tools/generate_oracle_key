@@ -6,7 +6,6 @@ source $ROOT_PATH/../.PACKAGE_USE
 
 echo -e "\033[0;33m ♨ Generation Oracle key for  Autonity WITH password from .env  \033[0m\n"
 
-
 GENERATION_RESULT=`$ROOT_PATH/includes/generate_account $ORACLE_KEY_PASSWD | tr -d $'\r'`
 #echo "OLD $ORACLE_UTC_FILE"
 FINAL_FILENAME="oracle.key"

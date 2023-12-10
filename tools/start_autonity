@@ -48,6 +48,9 @@ done
 
 sed -i "s|Authorization: Bearer ".*"|Authorization: Bearer  $PROMETHEUS_METRICS_TOKEN|" $ROOT_PATH/../.data/grafana/datasources/prometheus.yml
 
+if [ ! -f "$ROOT_PATH/../.data/autonity_oracle/plugins-conf.yml" ]; then
+  cp $ROOT_PATH/../.data/autonity_oracle/plugins-conf.yml.template $ROOT_PATH/../.data/autonity_oracle/plugins-conf.yml
+fi
 
 #docker network create
 docker-compose -f $ROOT_PATH/../docker-compose-network.yml up -d

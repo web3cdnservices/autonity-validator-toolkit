@@ -49,6 +49,9 @@ sed -i "s|Authorization: Bearer ".*"|Authorization: Bearer  $PROMETHEUS_METRICS_
 
 
 
+if [ ! -f "$ROOT_PATH/../.data/autonity_oracle/plugins-conf.yml" ]; then
+  cp $ROOT_PATH/../.data/autonity_oracle/plugins-conf.yml.template $ROOT_PATH/../.data/autonity_oracle/plugins-conf.yml
+fi
 
 
 #docker network create

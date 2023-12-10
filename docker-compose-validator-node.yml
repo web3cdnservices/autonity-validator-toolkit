@@ -61,9 +61,10 @@ services:
         ipv4_address: ${DOCKER_SUBNET_PREFIX}.3
     volumes:
       - ./.data/autonity_oracle:/autoracle
-      - ./.data/.autonity/keystore/${ORACLE_UTC_FILE}:/oracle.key:ro
+      - ./.data/.autonity/keystore:/autonity_keystore
+#      - ./.data/.autonity/keystore/${ORACLE_UTC_FILE}:/oracle.key:ro
     command:
-      - -key.file=/oracle.key
+      - -key.file=/autonity_keystore/oracle.key
       - -key.password=${ORACLE_KEY_PASSWD}
       - -ws=ws://autonity:8546
       - -plugin.dir=/usr/local/bin/plugins/
@@ -75,7 +76,7 @@ services:
     restart: always
     volumes:
       - ./.data/.autonity:/root/.autonity
-      - ./.data/.autonity/.autrc:/.autrc
+#      - ./.data/.autonity/.autrc:/.autrc
       - ./.data/autonity_node/autonity:/root/autonity_node
     networks:
       autonity_network:
