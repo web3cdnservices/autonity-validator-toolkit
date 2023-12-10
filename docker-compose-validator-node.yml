@@ -75,7 +75,7 @@ services:
     volumes:
       - ./.data/.autonity:/root/.autonity
       - ./.data/.autonity/.autrc:/.autrc
-      - ./.data/autonity_node/autonity/nodekey:/root/nodekey
+      - ./.data/autonity_node/autonity:/root/autonity_node
     networks:
       autonity_network:
         ipv4_address: ${DOCKER_SUBNET_PREFIX}.4
