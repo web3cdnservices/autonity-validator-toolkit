@@ -2,4 +2,3 @@
 rpc_endpoint=http://autonity:8545
 #keyfile = /root/.autonity/keystore/
 # Please set UTC filename and uncomment.
-keyfile = /root/.autonity/keystore/UTC--2023-12-10T17-23-01.232447000Z--7e0d8b22d17446f217dc14a400e5741dda2e273b
