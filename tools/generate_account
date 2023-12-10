@@ -27,10 +27,27 @@ do
 done
 
 
+read -p ' ^|^m Enter account name: ' input_name
+
+while [ "$input_name" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect account name. \033[0m \n"
+  read -p ' ^|^m Enter account name: ' input_name
+done
+
 GENERATION_RESULT=`$ROOT_PATH/includes/generate_account $input_password | tr -d $'\r'`
 
-echo "keyfile = /root/.autonity/keystore/${GENERATION_RESULT}" >> $ROOT_PATH/../.data/.autonity/.autrc
+FINAL_FILENAME=$input_name
+mv "$ROOT_PATH/../.data/.autonity/keystore/${GENERATION_RESULT}" "$ROOT_PATH/../.data/.autonity/keystore/${FINAL_FILENAME}"
 
-echo -e "Generated wallet: ${GENERATION_RESULT}\n"
+if [ ! -f "$ROOT_PATH/../.data/.autonity/.autrc" ]; then
+    cp $ROOT_PATH/../.data/.autonity/.autrc.template $ROOT_PATH/../.data/.autonity/.autrc
+    echo "keyfile = /root/.autonity/keystore/${FINAL_FILENAME}" >> $ROOT_PATH/../.data/.autonity/.autrc
+fi
 
+DECODED_WALLET_DATA=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${input_password}`
 bash $ROOT_PATH/generate_indexer_handbook
+
+echo -e "\n\n\n\nGenerated wallet: ${FINAL_FILENAME}\n"
+echo -e "Wallet details: \n\n ${DECODED_WALLET_DATA}"
+#bash $ROOT_PATH/generate_indexer_handbook

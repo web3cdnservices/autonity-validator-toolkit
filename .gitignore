@@ -3,5 +3,6 @@
 .env
 .data/.autonity/keystore/*
 .data/grafana/datasources/*.yml
+.data/.autonity/.autrc
 AutonityHandbook
 AutonityHandbook.tar.gz 

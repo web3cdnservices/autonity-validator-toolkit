@@ -1,0 +1,4 @@
+[aut]
+rpc_endpoint=http://autonity:8545
+#keyfile = /root/.autonity/keystore/
+# Please set UTC filename and uncomment.
