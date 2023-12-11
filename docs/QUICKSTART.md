@@ -35,7 +35,7 @@ Here your validator id:
 
 3. Run command `bound`
    ```
-   ./tools/validator_bound_tokens/
+   ./tools/validator_bound_tokens
    ```
 Paste here your validatorId.
 & password.
