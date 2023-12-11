@@ -10,12 +10,12 @@ do
   read -p ' ^|^m Enter account name: ' input_name
 done
 
-read -p ' ^|^m Enter new account password: ' input_password
+read -p ' ^|^m Enter account password: ' input_password
 
 while [ "$input_password" == "" ]
 do
   echo -e "\033[0;31m   ^|^x Incorrect password. \033[0m \n"
-  read -p ' ^|^m Enter new account password: ' input_password
+  read -p ' ^|^m Enter account password: ' input_password
 done
 
 ENODE=`aut node info | jq -r ".admin_enode"`
@@ -28,7 +28,9 @@ RAWTX=`docker exec -ti aut_client  /root/.local/bin/aut  validator register $ENO
 
 SIGNEDTX=`echo $RAWTX |  docker exec -i aut_client  /root/.local/bin/aut tx sign --password $input_password -`
 
-OUTPUTTX=`echo $SIGNEDTX |  docker exec -i aut_client  /root/.local/bin/aut tx send -`
+OUTPUTTX=`echo $SIGNEDTX |  docker exec -i aut_client  /root/.local/bin/aut tx send - |  tr -d $'\r' `
 
-echo -e "Tx info. Please use: aut tx wait 0x00000"
-echo $OUTPUTTX
+#echo -e "Tx info. Please use: aut tx wait 0x00000"
+echo -e "\nTransaction TX: $OUTPUTTX\n\n"
+
+docker exec -i aut_client  /root/.local/bin/aut tx wait $OUTPUTTX
