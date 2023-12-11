@@ -27,6 +27,8 @@ do
 done
 
 
+
+if [[ -z "$1" ]];
 read -p ' ^|^m Enter account name: ' input_name
 
 while [ "$input_name" == "" ]
@@ -34,6 +36,9 @@ do
   echo -e "\033[0;31m   ^|^x Incorrect account name. \033[0m \n"
   read -p ' ^|^m Enter account name: ' input_name
 done
+else
+input_name=$1
+fi
 
 GENERATION_RESULT=`$ROOT_PATH/includes/generate_account $input_password | tr -d $'\r'`
 
