@@ -55,4 +55,19 @@ aut node info | jq -r ".admin_enode"
 ```
 
 
-### Configure APIs for Oracle. (obrain keys)
+## Configure APIs for Oracle. (obrain keys)
+`Process registration in services and save api keys`
+- `https://currencyfreaks.com`
+- `https://openexchangerates.org`
+- `https://currencylayer.com`
+- `https://www.exchangerate-api.com`
+
+Open nano and edit configuration file. Uncomment blocks and paste API keys.
+
+```
+nano .data/autonity_oracle/plugins-conf.yml
+
+```
+
+
+`PS: save is Ctrl+X`
