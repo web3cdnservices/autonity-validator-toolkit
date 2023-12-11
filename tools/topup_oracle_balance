@@ -1,0 +1,30 @@
+#!/bin/bash
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+
+if [[ -z "$1" ]];
+then
+read -p ' ^|^m Enter amount: ' input_amount
+
+while [ "$input_name" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect sum \033[0m \n"
+  read -p ' ^|^m Enter amount: ' input_amount
+done
+else
+input_amount=$1
+fi
+
+read -p ' ^|^m Enter account password: ' input_password
+
+while [ "$input_password" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect password. \033[0m \n"
+  read -p ' ^|^m Enter account password: ' input_password
+done
+
+PUBLIC_ADDR=$(<"${ROOT_PATH}/../.data/.autonity/oracle.key.public")
+
+
+docker exec -i aut_client  /root/.local/bin/aut  tx make -t $PUBLIC_ADDR --value $input_amount | docker exec -i aut_client  /root/.local/bin/aut  tx sign --password $input_password - | docker exec -i aut_client  /root/.local/bin/aut  tx send -
+
