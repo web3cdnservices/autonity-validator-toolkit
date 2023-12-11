@@ -18,7 +18,7 @@ echo "ORACLE_UTC_FILE=\"${FINAL_FILENAME}\"" >> $ROOT_PATH/../.env
 
 DECODED_WALLET_DATA=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${ORACLE_KEY_PASSWD}`
 PRIVATE_KEY=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${ORACLE_KEY_PASSWD} | sed -n -e 's/^.*Private key: //p' |  tr -d $'\r' | cut -c3-`
-PUBLIC_KEY=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${ORACLE_KEY_PASSWD} | sed -n -e 's/^.*Public address: //p' |  tr -d $'\r' | cut -c3-`
+PUBLIC_KEY=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${ORACLE_KEY_PASSWD} | sed -n -e 's/^.*Public address: //p' |  tr -d $'\r' `
 
 echo "$PRIVATE_KEY" >  "$ROOT_PATH/../.data/.autonity/${FINAL_FILENAME}.private"
 echo "$PUBLIC_KEY" >  "$ROOT_PATH/../.data/.autonity/${FINAL_FILENAME}.public"

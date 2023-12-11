@@ -47,7 +47,7 @@ fi
 
 DECODED_WALLET_DATA=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${input_password}`
 PRIVATE_KEY=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${input_password} | sed -n -e 's/^.*Private key: //p' |  tr -d $'\r' | cut -c3-`
-PUBLIC_KEY=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${input_password} | sed -n -e 's/^.*Public address: //p' |  tr -d $'\r' | cut -c3-`
+PUBLIC_KEY=`docker exec -ti aut_client  /usr/local/bin/web3  account extract --keyfile=/root/.autonity/keystore/${FINAL_FILENAME} --password ${input_password} | sed -n -e 's/^.*Public address: //p' |  tr -d $'\r' `
 
 echo "$PRIVATE_KEY" >  "$ROOT_PATH/../.data/.autonity/${FINAL_FILENAME}.private"
 echo "$PUBLIC_KEY" >  "$ROOT_PATH/../.data/.autonity/${FINAL_FILENAME}.public"
