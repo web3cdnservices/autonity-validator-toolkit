@@ -22,6 +22,11 @@ cat .data/.autonity/main.public
 
 `wait 5 minutes for token delivery`
 
+### TopUp Oracle balance
+```
+./tools/topup_oracle_balance 0.1
+```
+
 ### Register validator
 1. Run command `register`
 
