@@ -1,7 +1,6 @@
 # Autonity validator node.
 
-cp .env.default .env
-##Step One
+## Step One
 ```
 cd /usr/src
 git clone https://github.com/web3cdnservices/autonity-validator-toolkit.git
