@@ -42,6 +42,11 @@ Paste here your validatorId.
 
 ## step Three form confirmation.
 
+Import Nodekey with command:
+```
+./tools/validator_import_nodekey
+```
+
 ### Open form https://game.autonity.org/awards/register-validator.html
 
 - Enode:  
