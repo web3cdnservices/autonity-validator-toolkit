@@ -29,6 +29,7 @@ done
 
 
 if [[ -z "$1" ]];
+then
 read -p ' ^|^m Enter account name: ' input_name
 
 while [ "$input_name" == "" ]
