@@ -6,7 +6,7 @@ if [[ -z "$1" ]];
 then
 read -p ' ^|^m Enter amount: ' input_amount
 
-while [ "$input_name" == "" ]
+while [ "$input_amount" == "" ]
 do
   echo -e "\033[0;31m   ^|^x Incorrect sum \033[0m \n"
   read -p ' ^|^m Enter amount: ' input_amount
