@@ -75,6 +75,7 @@ nano .env
       ## Toolkit WITHOUT! tunnel. (use only if you understand what you are doing)!!
    ```
    ./tools/start_autonity
+   ./tools/node_add_peers_piccadilly
    ```
 
    ![image](https://github.com/web3cdnservices/autonity-validator-toolkit/assets/115787312/c3cedde5-a511-435a-bb23-436372d1f7a1)
