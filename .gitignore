@@ -1,4 +1,5 @@
 .data/autonity_node
+.data/autonity_node_rpc
 .data/autonity_oracle/plugins-conf.yml
 .env
 .data/.autonity/keystore/*
