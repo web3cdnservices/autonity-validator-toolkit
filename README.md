@@ -5,7 +5,7 @@
 cd /usr/src
 git clone https://github.com/web3cdnservices/autonity-validator-toolkit.git
 cd autonity-validator-toolkit
-./tools/install_requirements_ubuntu.sh && ./tools/generate_env_passwords && ./tools/start_autonity && source ~/.bashrc && ./tools/setup_shell_environment && ./tools/node_add_peers_piccadilly && ./tools/generate_oracle_key && ./tools/generate_account main
+./tools/install_requirements_ubuntu.sh && ./tools/generate_env_passwords && ./tools/start_autonity &&  ./tools/setup_shell_environment && source ~/.bashrc && ./tools/node_add_peers_piccadilly && ./tools/generate_oracle_key && ./tools/generate_account main
 ```
 
 ## Step Two (form 1)
