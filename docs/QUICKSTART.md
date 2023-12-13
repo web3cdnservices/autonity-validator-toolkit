@@ -9,7 +9,7 @@ cd autonity-validator-toolkit
 ```
 
 ## Step Two (form 1)
-### Open form.(faucet registratuin)  https://game.autonity.org/getting-started/register.html
+### Open form.(faucet Registration)  https://game.autonity.org/getting-started/register.html
 
 `Address:`
 ```
