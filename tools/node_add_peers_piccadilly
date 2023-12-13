@@ -7,7 +7,7 @@ expect "To exit, press ctrl-d or type exit"
 #sleep 2
 send -- admin.addPeer('enode://d4dc137f987e17155a69b31e566494c16edafd228912483cc519a48ce85864781faccc38141cc0eb1df8cdb28b9b3ccd10e1c298bac78ac43bbe5804021c1152@34.142.71.5:30303')\n
 expect "true"
-send -- admin.addPeer('enode://74a4f767ad2f3f607a2db06732b44e6c61a68cae1959b331c18aea6256aae16bded31ba40dd85dcc4d719baaeb29f918726d19fa51b5d8174b27da0d7593e19b@34.142.33.89:30303')\n
+send -- admin.addPeer('enode://d820e4d53f1e47443c23f2db28b251ca8b8dc207a1b0a0e36ae1bbeb63d0cea4f00dabb61e5daf27468f022adc8780dfd181c57ce0db16a9668dd72e18ecac6b@159.203.156.236:30303')\n
 expect "true"
 send -- admin.addPeer("enode://0ddc30943837f9416f563063ed5d409aca37780b8b8f939ef9f4b7901b9eb94c09d7ba2af27f70b33d76e74403d00021c13ebc4943ad46bc1e5051689cd862b8@35.234.131.29:30303")\n
 expect "true"
