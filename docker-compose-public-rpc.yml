@@ -1,0 +1,49 @@
+version: "3"
+
+x-logging:
+  &default-logging
+  options:
+    max-file: '1'
+    compress: 'false'
+  driver: local
+
+networks:
+  autonity_network:
+    name: autonity_network
+
+services:
+  autonity_rpc:
+    image: autonity-git:latest
+    container_name: autonity_rpc
+    restart: always
+    networks:
+      autonity_network:
+        ipv4_address: ${DOCKER_SUBNET_PREFIX}.52
+    ports:
+      - 8945:8545
+      - 8946:8546
+      - 30303
+      - 30303/udp
+      - 6060 #PPROF
+      - 6064 #PROMETHEUS
+    volumes:
+      - ./.data/autonity_node_rpc:/autonity-chaindata
+    build:
+      context: ./src/docker/autonity/
+      dockerfile: Dockerfile
+    command:
+      - --datadir=/autonity-chaindata
+      - --${NETWORK_NAME}
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.api=aut,eth,net,txpool,web3,admin
+      - --http.vhosts=*
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.api=aut,eth,net,personal,txpool,web3,admin
+      - --nat=extip:${EXTERNAL_IP}
+      - --metrics
+      - --metrics.addr=0.0.0.0
+      - --metrics.port=6064
+      - --metrics.expensive
+      - --pprof
