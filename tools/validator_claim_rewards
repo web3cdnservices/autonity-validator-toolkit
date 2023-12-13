@@ -1,0 +1,27 @@
+#!/bin/bash
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+
+if [[ -z "$1" ]];
+then
+read -p ' ^|^m Enter validator address: ' PUBLIC_ADDR
+
+while [ "$PUBLIC_ADDR" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect validator address \033[0m \n"
+  read -p ' ^|^m Enter validator address: ' PUBLIC_ADDR
+done
+else
+PUBLIC_ADDR=$1
+fi
+
+read -p ' ^|^m Enter account password: ' input_password
+
+while [ "$input_password" == "" ]
+do
+  echo -e "\033[0;31m   ^|^x Incorrect password. \033[0m \n"
+  read -p ' ^|^m Enter account password: ' input_password
+done
+
+
+docker exec -i aut_client  /root/.local/bin/aut  validator claim-rewards --validator $PUBLIC_ADDR  | docker exec -i aut_client  /root/.local/bin/aut  tx sign --password $input_password - | docker exec -i aut_client  /root/.local/bin/aut  tx send -
