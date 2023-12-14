@@ -1,0 +1,17 @@
+#!/bin/bash
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+MESSAGE=$(jq -nc --arg nonce "$(date +%s%N)" '$ARGS.named')
+docker exec -i aut_client  /root/.local/bin/aut account sign-message $MESSAGE /root/.autonity/api_message.sig
+
+TOKEN_GENERATION_RESULT=`echo -n $MESSAGE | docker exec -i aut_client https https://cax.piccadilly.autonity.org/api/apikeys api-sig:@/root/.autonity/api_message.sig`
+echo -e "Generated api key"
+echo $TOKEN_GENERATION_RESULT
+echo "$TOKEN_GENERATION_RESULT" > $ROOT_PATH/../.data/.autonity/autonity_api.token
+
+echo -e "Selfcheck:"
+
+AUTONITY_API_RAW=$(<"${ROOT_PATH}/../.data/.autonity/autonity_api.token")
+API_TOKEN=`echo $AUTONITY_API_RAW | jq -r ".apikey"`
+
+https GET https://cax.piccadilly.autonity.org/api/balances/ API-Key:$API_TOKEN

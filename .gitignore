@@ -1,3 +1,4 @@
+.data/.autonity/*.sig
 .data/autonity_node
 .data/autonity_node_rpc
 .data/autonity_oracle/plugins-conf.yml
@@ -9,3 +10,5 @@ AutonityHandbook
 AutonityHandbook.tar.gz 
 .data/.autonity/*.private
 .data/.autonity/*.public
+.data/.autonity/autonity_api.token
+.data/.autonity/validator

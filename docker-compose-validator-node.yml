@@ -71,7 +71,7 @@ services:
       - -plugin.conf=/autoracle/plugins-conf.yml
 
   aut_client:
-    image: aut_client:latest
+    image: aut_client:${AUTONITY_AUT_CLIENT}
     container_name: aut_client
     restart: always
     volumes:

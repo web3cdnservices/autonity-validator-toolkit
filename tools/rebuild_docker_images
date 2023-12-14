@@ -52,8 +52,8 @@ fi
 #docker network create
 #docker-compose -f $ROOT_PATH/../docker-compose-network.yml up -d
 #echo -e "Network created\n"
-docker-compose -f $ROOT_PATH/../docker-compose-validator-node.yml  -f $ROOT_PATH/../docker-compose-monitoring.yml  build
-
+docker-compose -f $ROOT_PATH/../docker-compose-validator-node.yml up  --build --force-recreate --no-deps -d $1 
+#docker-compose -f $ROOT_PATH/../docker-compose-validator-node.yml up  --build --force-recreate --no-deps  $1 --no-cache 
 
 echo -e "\033[0;33m ✈ Ready. you can ./tools/start_autonity  \033[0m\n"
 
