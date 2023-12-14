@@ -1,2 +1,2 @@
 #!/bin/bash
-docker exec -i aut_client  http "$@"
+docker exec -ti aut_client  http "$@"
