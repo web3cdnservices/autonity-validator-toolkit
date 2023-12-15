@@ -22,8 +22,8 @@ services:
     ports:
       - 8945:8545
       - 8946:8546
-      - 30303
-      - 30303/udp
+      - 30304:30304
+      - 30304:30304/udp
       - 6060 #PPROF
       - 6064 #PROMETHEUS
     volumes:
@@ -33,6 +33,7 @@ services:
       dockerfile: Dockerfile
     command:
       - --datadir=/autonity-chaindata
+      - --port=30304
       - --${NETWORK_NAME}
       - --http
       - --http.addr=0.0.0.0
