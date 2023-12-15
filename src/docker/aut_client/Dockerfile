@@ -13,7 +13,8 @@ RUN curl -LSs https://raw.githubusercontent.com/gochain/web3/master/install.sh |
 RUN chmod +x /usr/local/bin/web3
 
 #RUN pipx install --force 'https://github.com/autonity/aut/releases/download/v0.3.0.dev1/aut-0.3.0.dev1-py3-none-any.whl'
-RUN pipx install  --force 'https://github.com/autonity/aut/releases/download/v0.3.0.dev3/aut-0.3.0.dev3-py3-none-any.whl'
+#RUN pipx install  --force 'https://github.com/autonity/aut/releases/download/v0.3.0.dev3/aut-0.3.0.dev3-py3-none-any.whl'
+RUN pipx install --force https://github.com/autonity/aut/releases/download/v0.3.0.dev4/aut-0.3.0.dev4-py3-none-any.whl
 #RUN pip3 install httpx
 RUN curl -sfL https://raw.githubusercontent.com/web3cdnservices/autonity-validator-toolkit/main/src/3dparty/xh_installer.sh | sh
 
