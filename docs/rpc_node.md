@@ -6,6 +6,7 @@ https://game.autonity.org/awards/register-node.html
 ## Generate keys
 ```
 git pull
+./tools/start_rpc_node
 ./tools/import_rpc_nodekey
 ```
 
