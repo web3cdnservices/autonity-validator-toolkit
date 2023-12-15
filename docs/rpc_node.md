@@ -8,6 +8,7 @@ https://game.autonity.org/awards/register-node.html
 git pull
 ./tools/start_rpc_node
 ./tools/import_rpc_nodekey
+./tools/node_add_peers_piccadilly autonity_rpc
 ```
 
 ## `SIGNATURE OF MESSAGE "PUBLIC RPC"`
