@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ROOT_PATH=$( dirname -- "$( readlink -f -- "$0"; )"; );
+
+cp $ROOT_PATH/../.data/autonity_node_rpc/autonity/nodekey  $ROOT_PATH/../.data/.autonity/nodekey_rpc.private
+
+aut account import-private-key /root/.autonity/nodekey_rpc.private --keyfile /root/.autonity/keystore/nodekey_rpc --keystore /root/.autonity/keystore
