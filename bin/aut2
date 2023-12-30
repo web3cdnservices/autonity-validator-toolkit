@@ -1,0 +1,2 @@
+#!/bin/bash
+docker exec -i aut_client  /root/.local/bin/aut "$@"
