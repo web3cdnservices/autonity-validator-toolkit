@@ -4,7 +4,7 @@ FROM golang:1.21-alpine as builder
 RUN apk add --no-cache make gcc musl-dev linux-headers libc-dev git perl-utils
 RUN mkdir /app
 RUN cd /app
-RUN git clone -b v0.12.2 --depth 1 https://github.com/autonity/autonity.git /app/autonity
+RUN git clone -b v0.12.3 --depth 1 https://github.com/autonity/autonity.git /app/autonity
 RUN cd /app/autonity && make autonity
 FROM alpine:latest
 
