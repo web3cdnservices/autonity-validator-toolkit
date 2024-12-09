@@ -23,15 +23,24 @@ services:
     ports:
       - "0.0.0.0:30304:30304" #P2P TCP
       - "0.0.0.0:30304:30304/udp" #P2P UDP
-#      - "127.0.0.1:8545:8545" # HTTP
-#      - "127.0.0.1:8546:8546" # Websocket
-#      - "127.0.0.1:6064:6064" #PROMETHEUS
+    #      - "127.0.0.1:8545:8545" # HTTP
+    #      - "127.0.0.1:8546:8546" # Websocket
+    #      - "127.0.0.1:6064:6064" #PROMETHEUS
     volumes:
       - ./.data/autonity_node_rpc:/autonity-chaindata
     command:
       - --datadir=/autonity-chaindata
       - --port=30304
-      - --${NETWORK_NAME}
+      - --networkid=65100004
+      - --syncmode=full
+      - --piccadilly
+      - --cache=4096
+      - --cache.trie=30
+      - --cache.gc=0
+      - --cache.snapshot=20
+      - --gcmode=archive
+      - --graphql
+      - --graphql.vhosts=*
       - --http
       - --http.addr=0.0.0.0
       - --http.api=aut,eth,net,txpool,web3
@@ -39,9 +48,7 @@ services:
       - --ws
       - --ws.addr=0.0.0.0
       - --ws.api=aut,eth,net,personal,txpool,web3
-      - --nat=extip:${EXTERNAL_IP}
       - --metrics
       - --metrics.addr=0.0.0.0
       - --metrics.port=6064
       - --metrics.expensive
-      - --pprof
