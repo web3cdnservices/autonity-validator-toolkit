@@ -6,7 +6,7 @@ RUN apk add --no-cache make gcc musl-dev linux-headers libc-dev git perl-utils
 RUN mkdir /app
 RUN cd /app
 RUN git clone -b v0.13.0 --depth 1 https://github.com/autonity/autonity.git /app/autonity
-RUN cd /app/autonity && make all
+RUN cd /app/autonity && make autonity && make ethkey
 FROM alpine:latest
 
 RUN apk add --no-cache ca-certificates

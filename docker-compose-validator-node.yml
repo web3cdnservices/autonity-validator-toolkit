@@ -13,7 +13,7 @@ networks:
 
 services:
   autonity:
-    image: autonity-git:latest
+    image: ghcr.io/autonity/autonity:${AUTONITY_NODE_RELEASE:-latest}
     container_name: autonity
     restart: always
     networks:
@@ -29,9 +29,9 @@ services:
     volumes:
       - ./.data/autonity_node:/autonity-chaindata
       - ./.data/.autonity:/root/.autonity
-    build:
-      context: ./src/docker/autonity/
-      dockerfile: Dockerfile
+#    build:
+#      context: ./src/docker/autonity/
+#      dockerfile: Dockerfile
     command:
       - --datadir=/autonity-chaindata
       - --${NETWORK_NAME}

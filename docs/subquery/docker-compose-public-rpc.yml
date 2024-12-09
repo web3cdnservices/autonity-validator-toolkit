@@ -7,9 +7,11 @@ x-logging:
     compress: 'false'
   driver: local
 
+
 networks:
-  autonity_network:
-    name: autonity_network
+  indexer_services:
+    name: indexer_services
+    external: true
 
 services:
   autonity_rpc:
@@ -17,20 +19,15 @@ services:
     container_name: autonity_rpc
     restart: always
     networks:
-      autonity_network:
-        ipv4_address: ${DOCKER_SUBNET_PREFIX}.52
+      - indexer_services
     ports:
-      - 8945:8545
-      - 8946:8546
-      - 30304:30304
-      - 30304:30304/udp
-#      - 6060 #PPROF
-      - 6064 #PROMETHEUS
+      - "0.0.0.0:30304:30304" #P2P TCP
+      - "0.0.0.0:30304:30304/udp" #P2P UDP
+#      - "127.0.0.1:8545:8545" # HTTP
+#      - "127.0.0.1:8546:8546" # Websocket
+#      - "127.0.0.1:6064:6064" #PROMETHEUS
     volumes:
       - ./.data/autonity_node_rpc:/autonity-chaindata
-#    build:
-#      context: ./src/docker/autonity/
-#      dockerfile: Dockerfile
     command:
       - --datadir=/autonity-chaindata
       - --port=30304
