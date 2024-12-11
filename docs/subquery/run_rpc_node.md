@@ -25,7 +25,7 @@
 
 3. ### Connect Autonity RPC to Subquery Indexer
 
-   #### 3.1.  Add new project with cid: `QmW5RcoyWKRJdrgV1aGair8UtGZhpfK4VrYJvs4sRzGVL2`
+   #### 3.1.  Add new project with cid: `QmSXV8pkxKufQNGdaJ2N15t4cCta4iYWL7QXdLvtjEaS48`
 
    #### 3.2.  Fill fields with values:
 
