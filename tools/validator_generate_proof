@@ -16,4 +16,4 @@ fi
 
 PUBLIC_ADDR=$(<"${ROOT_PATH}/../.data/.autonity/${input_name}.public")
 
-docker exec -ti autonity autonity genOwnershipProof --nodekey /autonity-chaindata/autonity/nodekey --oraclekey /root/.autonity/oracle.key.private $PUBLIC_ADDR | sed -n -e 's/^.*Signature hex: //p' |  tr -d $'\r'
+docker exec -ti autonity autonity genOwnershipProof --nodekey /autonity-chaindata/autonity/autonitykeys --oraclekey /root/.autonity/oracle.key.private $PUBLIC_ADDR | sed -n -e 's/^.*Signature hex: //p' |  tr -d $'\r'

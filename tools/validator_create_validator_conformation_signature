@@ -1,1 +1,1 @@
-aut account sign-message -k  /root/.autonity/keystore/nodekey "validator onboarded"
+aut account sign-message -k  /root/.autonity/keystore/autonitykeys "validator onboarded"

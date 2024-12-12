@@ -22,7 +22,7 @@ PROJECTS_LIST=`curl -s 'https://validators.game.autonity.org/api/ds/query' \
   -H 'sec-ch-ua-mobile: ?0' \
   -H 'sec-ch-ua-platform: "Linux"' \
   -H 'x-grafana-org-id: 1' \
-  --data-raw '{"queries":[{"refId":"A","datasource":{"uid":"jdD9V614z","type":"postgres"},"rawSql":"  select * from piccadilly_65100001.validators_with_username_view_r4;","format":"table","datasourceId":6,"intervalMs":60000,"maxDataPoints":1306}],"range":{"from":"2023-12-13T11:11:08.479Z","to":"2023-12-13T17:11:08.479Z","raw":{"from":"now-6h","to":"now"}},"from":"1702465868479","to":"1702487468479"}'`
+  --data-raw '{"queries":[{"refId":"A","datasource":{"uid":"jdD9V614z","type":"postgres"},"rawSql":"  select * from piccadilly_65100004.validators_with_username_view_r4;","format":"table","datasourceId":6,"intervalMs":60000,"maxDataPoints":1306}],"range":{"from":"2024-12-09T11:11:08.479Z","to":"2025-12-13T17:11:08.479Z","raw":{"from":"now-6h","to":"now"}},"from":"1702465868479","to":"1702487468479"}'`
 
 
 readarray -t conversations < <(echo $PROJECTS_LIST | tr -d '\n' | tr -d '\n'  | jq -rc  ".results.A.frames[0].data.values[0] | map(. | fromjson) | map(.enode) | .[]")

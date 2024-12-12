@@ -32,7 +32,7 @@ mkdir $BASE_PATH/AutonityHandbook/wireguard
 mkdir $BASE_PATH/AutonityHandbook/keys
 
 cp  $BASE_PATH/.env  $BASE_PATH/AutonityHandbook/env.dump
-cp  $BASE_PATH/.data/autonity_node/autonity/nodekey $BASE_PATH/AutonityHandbook/nodekey
+cp  $BASE_PATH/.data/autonity_node/autonity/autonitykeys $BASE_PATH/AutonityHandbook/autonitykeys
 cp  $BASE_PATH/.data/.autonity/keystore/* $BASE_PATH/AutonityHandbook/keys
 
 if [  -f " ${WG_CONFIG_PATH}/peer1/peer1.conf" ]; then
