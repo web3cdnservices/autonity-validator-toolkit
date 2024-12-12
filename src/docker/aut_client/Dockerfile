@@ -1,8 +1,8 @@
-FROM ubuntu:23.10 as builder
+FROM ubuntu:24.10 as builder
 
 WORKDIR /app
 
-FROM ubuntu:23.04
+FROM ubuntu:24.10
 RUN set -x && apt-get update && apt-get install -y \
     ca-certificates bash curl wget bc jq pipx python3 git python3-pip python3-httpx httpie  && \
     rm -rf /var/lib/apt/lists/*
